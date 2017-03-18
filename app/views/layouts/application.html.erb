@@ -9,23 +9,33 @@
   </head>
 
   <body>
+  	<div id="main" class="container">
+  		<header class="navbar navbar-default" role="navigation">
+  			<div id="logo" class="navbar-brand"><% link_to "Hacker News", root_path %></div>
+  			<nav class="collapse navbar-collapse nav-ex-1-collapse">
+  				<% if user_signed_in? %>
+  					<ul class="nav navbar-nav navbar-left">
+  						<li><%= link_to "Submit", new_submission_path %></li>
+  						<li><%= link_to "Account", edit_user_registration_path %></li>
+  					</ul>
+  					<ul class="nav navbar-nav navbar-right">
+  						<li><%= link_to "logout", destroy_user_session_path %></li>
+  					</ul>
+  				<% else %>
+					<ul class="nav navbar-nav navbar-right">
+						<li><%= link_to "login", new_user_session_path %></li>
+					</ul>
+  				<% end %>
+  			</nav>
+  		</header>
+  	</div>
+
 	<% flash.each do |name, msg| %>
 		<%= content_tag(:div, msg, class: 'alert alert-#{name}') %>
 	<% end %>
-
-	<% if user_signed_in? %>
-		<ul>
-			<li><%= link_to 'submit', new_submission_path %></li>
-			<li><%= link_to 'Account', edit_user_registration_path %></li>
-			<li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
-		</ul>
-	<% else %>
-		<ul>
-			<li><%= link_to 'Sign up', new_user_registration_path %></li>
-			<li><%= link_to 'Sign in', new_user_session_path %></li>
-		</ul>
-	<% end %>
-
-    <%= yield %>
+	<div id="container" class="center-block">
+		<%= yield %>
+	</div>
+    
   </body>
 </html>
