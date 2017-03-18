@@ -6,6 +6,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+
   </head>
 
   <body>
@@ -19,7 +21,7 @@
   						<li><%= link_to "Account", edit_user_registration_path %></li>
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
-  						<li><%= link_to "logout", destroy_user_session_path %></li>
+  						<li><%= link_to "logout", destroy_user_session_path, :method => :delete %></li>
   					</ul>
   				<% else %>
 					<ul class="nav navbar-nav navbar-right">
@@ -28,14 +30,16 @@
   				<% end %>
   			</nav>
   		</header>
-  	</div>
+  	
 
-	<% flash.each do |name, msg| %>
-		<%= content_tag(:div, msg, class: 'alert alert-#{name}') %>
-	<% end %>
-	<div id="container" class="center-block">
-		<%= yield %>
-	</div>
-    
+    	<% flash.each do |name, msg| %>
+    		<%= content_tag(:div, msg, class: 'alert alert-#{name}') %>
+    	<% end %>
+
+    	<div id="container" class="center-block">
+    		<%= yield %>
+    	</div>
+
+    </div>  
   </body>
 </html>

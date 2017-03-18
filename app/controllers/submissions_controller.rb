@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
 
   def index
-    @submissions = Submission.all
+    @submissions = Submission.order(cached_votes_total: :desc)
   end
 
   def show
