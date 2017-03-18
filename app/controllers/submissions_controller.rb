@@ -50,7 +50,24 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def upvote
+    @submission = find_params
+
+    @submission.upvote_by current_user
+    redirect_to :back
+  end
+  def downvote
+    @submission = find_params
+
+    @submission.downvote_by current_user
+    redirect_to :back
+  end
+
   private
+    def find_params
+      Submission.find(params[:id])
+    end
+
     def set_submission
       @submission = Submission.find(params[:id])
     end
